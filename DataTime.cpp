@@ -1,3 +1,4 @@
+#pragma once
 #include "DataTime.h"
 #include <iostream>
 
