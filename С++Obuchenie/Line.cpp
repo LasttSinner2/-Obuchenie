@@ -57,3 +57,20 @@ void Line::PrintLine() const {
         << "), End (" << GetEndX() << ", " << GetEndY()
         << "), Length = " << GetLength() << std::endl;
 }
+
+
+// ѕроверка принадлежности точки отрезку
+bool Line::IsPointOnLine(const Point& point) const {
+    // ¬ычисл€ем рассто€ни€
+    double distStartToPoint = std::sqrt(std::pow(point.GetX() - start.GetX(), 2) +
+        std::pow(point.GetY() - start.GetY(), 2));
+    double distEndToPoint = std::sqrt(std::pow(point.GetX() - end.GetX(), 2) +
+        std::pow(point.GetY() - end.GetY(), 2));
+    double distStartToEnd = GetLength();
+
+    // ѕогрешность дл€ сравнени€ чисел с плавающей точкой
+    const double epsilon = 1e-6;
+
+    // ѕровер€ем, равно ли сумма рассто€ний от точки до концов отрезка его длине
+    return std::abs(distStartToPoint + distEndToPoint - distStartToEnd) < epsilon;
+}

@@ -36,4 +36,6 @@ public:
     void Move(int sdvig);
 
     void PrintLine() const;
+
+    bool IsPointOnLine(const Point& point) const;
 };
