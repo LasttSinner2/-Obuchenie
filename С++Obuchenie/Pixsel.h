@@ -13,7 +13,11 @@ public:
     // Конструктор с параметрами
     Pixsel(int x, int y, int color);
 
-    
+    // Конструктор преобразования
+    Pixsel(int x);
+
+    // Деструктор 
+    ~Pixsel();
 
     // Геттеры
     int GetX() const;

@@ -18,6 +18,7 @@ int main()
     pix.printPixsel();
     cout << "____________________________________________________________________________" << endl;
     Pixsel pix2(11, 12, 25);
+    pix2 = 5;
     double dist = Distance(pix, pix2);
     cout << "Distance: " << dist << endl;
     if (pix == pix2) {

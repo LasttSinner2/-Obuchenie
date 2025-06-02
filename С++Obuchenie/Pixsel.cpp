@@ -2,15 +2,24 @@
 #include "Pixsel.h"
 #include <cmath>
 #include <iostream>
+#include <map>
 
 // Конструктор по умолчанию
 Pixsel::Pixsel() : x(0), y(0), color(0) {}
 
 // Конструктор с параметрами
 Pixsel::Pixsel(int x, int y, int color) : x(x), y(y), color(color) {}
+//конструктор преобразования
+Pixsel::Pixsel(int x) {
+    SetX(x);
+    SetY(x);
+    SetColor(0);
+}
 
+// Деструктор 
+Pixsel::~Pixsel() {
 
-
+}
 // Геттеры
 int Pixsel::GetX() const {
     return x;
@@ -70,3 +79,12 @@ double Distance(const Pixsel& p1, const Pixsel& p2) {
 
 };
 
+// Класс для управления мапой пикселей
+class PixselMap {
+private:
+    std::map<std::pair<int, int>, Pixsel> pixels;
+
+public:
+
+
+}
