@@ -38,6 +38,15 @@ int main()
     cout << "____________________________________________________________________________" << endl;
     cout << line.IsPointOnLine(p) << endl;
 
+    PixselMap pixselMap;
+
+    pixselMap.AddPixel(10, 20, 30);
+    pixselMap.AddPixel(44, 228, 57);
+    pixselMap.AddPixel(228, 72, 88);
+    cout << "____________________________________________________________________________" << endl;
+    pixselMap.PrintAllPixels();
+    
+
     return 0;
 }
 

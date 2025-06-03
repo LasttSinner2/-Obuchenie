@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 
+
 // Конструктор по умолчанию
 Pixsel::Pixsel() : x(0), y(0), color(0) {}
 
@@ -59,17 +60,29 @@ void Pixsel::Set(int x, int y, int color) {
 }
 
 // фунция печати пикселя
-void Pixsel::printPixsel() {
+void Pixsel::printPixsel() const{
     std::cout << "x : " << GetX() << std::endl;
     std::cout << "y : " << GetY() << std::endl;
     std::cout << "color : " << GetColor() << std::endl;
 }
 
-
+// перегрузка оператора равенства
 bool Pixsel::operator==(const Pixsel& other) const {
     return x == other.x && y == other.y && color == other.color;
 }
 
+
+// перегрузка оператора неравенства
+bool Pixsel::operator!=(const Pixsel& other) const {
+    return !(*this == other);
+}
+
+
+// функция смещения пикселя
+void Pixsel::MuvePixsel(int dx, int dy) {
+    x += dx;
+    y += dy;
+}
 
 // Реализация функции Distance
 double Distance(const Pixsel& p1, const Pixsel& p2) {
@@ -79,12 +92,57 @@ double Distance(const Pixsel& p1, const Pixsel& p2) {
 
 };
 
-// Класс для управления мапой пикселей
 class PixselMap {
 private:
     std::map<std::pair<int, int>, Pixsel> pixels;
 
 public:
+    // Добавление пикселя в мапу
+    void AddPixel(int x, int y, int color) {
+        if (color >= 0 && color <= 255) {
+            pixels[{x, y}] = Pixsel(x, y, color);
+            std::cout << "Pixel added at (" << x << ", " << y << ") with color " << color << std::endl;
+        }
+        else {
+            std::cout << "Invalid color value: " << color << ". Color must be between 0 and 255." << std::endl;
+        }
+
+    }
+
+    // Удаление пикселя по координатам
+    void RemovePixel(int x, int y) {
+        auto it = pixels.find({ x, y });
+        if (it != pixels.end()) {
+            pixels.erase(it);
+            std::cout << "Pixel removed at (" << x << ", " << y << ")" << std::endl;
+        }
+        else {
+            std::cout << "No pixel found at (" << x << ", " << y << ")" << std::endl;
+        }
+    }
+
+    // Вывод всех пикселей
+    void PrintAllPixels() const {
+        if (pixels.empty()) {
+            std::cout << "No pixels in the map." << std::endl;
+            return;
+        }
+        for (const auto& pair : pixels) {
+            std::cout << "Pixel at (" << pair.first.first << ", " << pair.first.second << "):" << std::endl;
+            pair.second.printPixsel(); // Вызов для константного объекта
+            std::cout << "------------------------" << std::endl;
+        }
+    }
+
+    // Получение пикселя по координатам
+    bool GetPixel(int x, int y, Pixsel& pixel) const {
+        auto it = pixels.find({ x, y });
+        if (it != pixels.end()) {
+            pixel = it->second;
+            return true;
+        }
+        return false;
+    }
 
 
-}
+};

@@ -33,11 +33,13 @@ public:
     void Set(int x, int y, int color);
 
     // фунция печати пикселя
-    void printPixsel();
+    void printPixsel() const;
+
+    void MuvePixsel(int dx, int dy);
 
     // операторы
     bool operator==(const Pixsel& other) const;
-    
+    bool operator!=(const Pixsel& other) const;
 };
 
 // Свободная функция для вычисления расстояния
