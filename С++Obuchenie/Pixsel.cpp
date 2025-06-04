@@ -3,6 +3,7 @@
 #include <cmath>
 #include <iostream>
 #include <map>
+#include <vector>
 
 
 // Конструктор по умолчанию
@@ -95,8 +96,17 @@ double Distance(const Pixsel& p1, const Pixsel& p2) {
 class PixselMap {
 private:
     std::map<std::pair<int, int>, Pixsel> pixels;
-
+    static const int WIDTH = 10;  // Ширина холста
+    static const int HEIGHT = 10; // Высота холста
+    std::vector<std::vector<char>> canvas;
 public:
+
+    // Конструктор
+    PixselMap() {
+        // Инициализация холста пустыми символами
+        canvas = std::vector<std::vector<char>>(HEIGHT, std::vector<char>(WIDTH, '.'));
+    }
+
     // Добавление пикселя в мапу
     void AddPixel(int x, int y, int color) {
         if (color >= 0 && color <= 255) {
@@ -143,6 +153,53 @@ public:
         }
         return false;
     }
+
+    void Draw(int x, int y) {
+        if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT) {
+            std::cout << "Coordinates (" << x << ", " << y << ") are out of canvas bounds!" << std::endl;
+            return;
+        }
+        auto it = pixels.find({ x,y });
+        if (it != pixels.end()) {
+            int color = it->second.GetColor();
+            // Определяем символ в зависимости от цвета
+            char symbol = '.';
+            if (color > 0) {
+                if (color <= 85) symbol = '#';  // Тёмный
+                else if (color <= 170) symbol = '+'; // Средний
+                else symbol = '*'; // Светлый
+            }
+            canvas[x][y] = symbol;
+            std::cout << "Pixel drawn at (" << x << ", " << y << ") with color " << color << std::endl;
+
+        }
+        else {
+            std::cout << "No pixel found at (" << x << ", " << y << ") to draw!" << std::endl;
+        }
+    }
+
+    
+
+    
+
+
+
+
+    void DisplayCanvas() const {
+        for (int k = 0; k < WIDTH; k++) {
+            std::cout << k << " ";
+        }
+
+        for (int l = 0; l < HEIGHT; l++) {
+            std::cout << l << " ";
+            for (int k = 0; k < WIDTH; ++k){
+                std::cout << canvas[l][k] << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
+
 
 
 };
