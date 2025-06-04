@@ -23,3 +23,12 @@ void Point::Print()
 	std::cout << '(' << x << ',' << y << ')';
 }
 
+Point Point::operator +(const Point& other)
+{
+	return Point(x + other.x, y + other.y);
+}
+int Point::operator *(const Point& other)
+{
+	return x * other.x + y * other.y;
+}
+

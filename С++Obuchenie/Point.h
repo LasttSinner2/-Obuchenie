@@ -23,4 +23,7 @@ public:
 
 	void Print();
 
+	Point operator +(const Point&);
+	int operator *(const Point&);
+
 };
