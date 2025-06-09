@@ -1,6 +1,7 @@
 #pragma once
 #include "Point.h"
 
+
 // Конструктор по умолчанию
 Point::Point() : x(0), y(0) {}
 
@@ -30,5 +31,13 @@ Point Point::operator +(const Point& other)
 int Point::operator *(const Point& other)
 {
 	return x * other.x + y * other.y;
+}
+
+void Point::SaveToFile(std::ofstream& outFile) const {
+	if (!outFile.is_open()) {
+		std::cerr << "Error: File is not open for writing!\n";
+		return;
+	}
+	outFile << x << " " << y << "\n"; // Простой формат: x и y через пробел
 }
 

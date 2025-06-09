@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include <fstream>
 #include <string>
 
 // Структура для даты
@@ -31,4 +31,6 @@ std::string Grater(const Time& t1, const Time& t2);
 std::string Grater(const Date& d1, const Date& d2);
 bool InputTime(Time& t);
 bool InputDate(Date& d);
+
+void SaveDateToFile(const Date& d, std::ofstream& outFile);
 

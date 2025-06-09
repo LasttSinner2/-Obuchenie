@@ -139,3 +139,13 @@ bool InputDate(Date& d) {
     cin >> day >> month >> year;
     return Set(d, day, month, year);
 }
+
+
+void SaveDateToFile(const Date& d, std::ofstream& outF) {
+    if (!outF.is_open()) {
+        std::cerr << "Error: File is not open for writing!\n";
+        return;
+    }
+    outF << d.day << " " << d.month << " " << d.year << "\n";
+
+}

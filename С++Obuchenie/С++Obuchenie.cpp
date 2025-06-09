@@ -59,9 +59,25 @@ int main()
     // Выводим холст
     map.DisplayCanvas();
 
-    
+    // перегруженный оператор <<
+    std::cout << p;
 
-   
+    std::ofstream outFile("points.txt");
+    if (outFile.is_open()) {
+        p.SaveToFile(outFile);
+        outFile.close();
+    }
+
+
+    Date d;
+    Set(d, 12, 12, 2022);
+
+    std::ofstream outF("Data.txt");
+    if (outF.is_open()) {
+        SaveDateToFile(d, outF);
+        outF.close();
+    }
+    
 
 
     return 0;
